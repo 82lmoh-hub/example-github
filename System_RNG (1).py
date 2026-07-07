@@ -25,14 +25,6 @@ def create_system(data):
 
     #CALLING DATA FROM OTHER FILES
 
-    prices = get_stream_prices(water_price=data['water_price'],
-                            manure_price=data['manure_price'],
-                            RIN_price=data['RIN_price'],
-                            solid_digestate_price=data['solid_digestate_price'],
-                            liquid_digestate_price=data['liquid_digestate_price'],
-                            Natural_gas_price=data['Natural_gas_price'],
-                            Diesel_price=data['diesel_price'])
-
 
     RNG_price_value = prices['RNG']
     Nat_gas = prices['Natural_gas']
@@ -185,6 +177,9 @@ def create_system(data):
     Recirculated_slurry.imass['H2O'] = 5000 # kg/hr initial guess for the first run
 
     Recirculated_CO2 = bst.Stream('Recirculated_CO2', units='kg/hr', phase='g')
+    Recirculated_CO2 = bst.Stream('Recirculated_CO2', units='kg/hr', phase='g')
+    Recirculated_CO2 = bst.Stream('Recirculated_CO2', units='kg/hr', phase='g')
+    Recirculated_CO2 = bst.Stream('Recirculated_CO2', units='kg/hr', phase='g')
     
     'Product streams'
     RNG = bst.Stream('RNG', units='kg/hr', phase='g', price=prices['RNG'])
@@ -204,8 +199,6 @@ def create_system(data):
 
     # Set number of cows
     Manure_Pit.number_of_cows = data['cows']
-
-    Manure_Pump = units.Pump('Manure_Pump', ins=Manure_Pit-0, outs=Manure)
 
     Grass_Storage = GrassStorageTank(grass_storage=grass_storage,
                                      use_grass=data['Use_grass'],
